@@ -15,14 +15,14 @@ public:
  arr = new int[s];
  }
 
- void enQueue(int value);
+ void enQueue(int ele);
  int deQueue();
  void displayQueue();
 };
 
 
 
-void Queue::enQueue(int value)
+void Queue::enQueue(int ele)
 {
  if ((front == 0 && rear == size-1) ||
    (rear == (front-1)%(size-1)))
@@ -34,19 +34,19 @@ void Queue::enQueue(int value)
  else if (front == -1)
  {
   front = rear = 0;
-  arr[rear] = value;
+  arr[rear] = ele;
  }
 
  else if (rear == size-1 && front != 0)
  {
   rear = 0;
-  arr[rear] = value;
+  arr[rear] = ele;
  }
 
  else
  {
   rear++;
-  arr[rear] = value;
+  arr[rear] = ele;
  }
 }
 
@@ -113,10 +113,10 @@ int main()
         switch (ch)
         {
         case 1:
-            int value;
+            int ele;
             cout << "Enter value to enqueue: ";
-            cin >> value;
-            q.enQueue(value);
+            cin >> ele;
+            q.enQueue(ele);
             break;
         case 2:
             cout<< "Element deleted: " << q.deQueue() << endl;
