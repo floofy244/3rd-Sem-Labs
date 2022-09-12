@@ -24,10 +24,9 @@ public:
 
 void Queue::enQueue(int ele)
 {
- if ((front == 0 && rear == size-1) ||
-   (rear == (front-1)%(size-1)))
+ if ((front == 0 && rear == size-1) ||(rear == (front-1)%(size-1)))
  {
-  printf("\nQueue is Full");
+  printf("\nQueue is Full\n");
   return;
  }
 
