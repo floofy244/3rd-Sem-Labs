@@ -185,8 +185,8 @@ void str_del()
 int main()
 {
     //menu driven
-    float result;
-    int choice, num;
+    
+    int choice;
     cout << "Press 1 to find length\n";
     cout << "Press 2 to concantenate\n";
     cout << "Press 3 to compare strings\n";
