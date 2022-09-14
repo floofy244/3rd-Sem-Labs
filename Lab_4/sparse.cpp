@@ -90,5 +90,14 @@ class sparseMatrix
 
 int main()
 {
-    
+    int r, c;
+    cout << "Enter the number of rows: ";
+    cin >> r;
+    cout << "Enter the number of columns: ";
+    cin >> c;
+    sparseMatrix m(r, c, 0);
+    m.input();
+    m.display();
+    m.sparse();
+    return 0;
 }
