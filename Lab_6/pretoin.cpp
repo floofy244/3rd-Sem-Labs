@@ -1,9 +1,8 @@
-//Program to convert a Postfix expression to an Infix expression
+//Program to convert a Prefix expression to an Infix expression
 #include <iostream>
 #include <algorithm>
 using namespace std;
 const int STACK_SIZE=100;
-
 class Stack{
     int top;
     string arr[100];
@@ -18,6 +17,7 @@ class Stack{
         else
             cout<<"Stack Overflow!";
     }
+
     string pop(){
         if(top>=0)
             return arr[top--];
@@ -30,9 +30,11 @@ class Stack{
     }
 };
 
-string postToInfix(string pre){
+string pretoInfix(string pre){
     Stack s;
-    string output, final;
+    string output;
+    // PRE DOESN'T HAVE BRACKETS
+    reverse(pre.begin(),pre.end());
     int l=pre.length();
     for(int i=0;i<l;i++){
         if(isdigit(pre[i])||isalpha(pre[i])){
@@ -41,11 +43,13 @@ string postToInfix(string pre){
         else{
             string a=s.pop();
             string b=s.pop();
-            string exp='('+b+pre[i]+a+')';
+            string exp=')'+b+pre[i]+a+'(';
             s.push(exp);
         }
     }
-    output=s.peek();
+    output=s.pop();
+    //INFIX HAS BRACKETS, THEREFORE THEY, INITIALLY ARE ADDED IN REVERSE.
+    reverse(output.begin(),output.end());
     return output;
 }
 
@@ -53,5 +57,5 @@ int main(){
     string inp;
     cout<<"Enter the expression:";
     cin>>inp;
-    cout<<postToInfix(inp);
+    cout<<pretoInfix(inp);
 }
