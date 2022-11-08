@@ -1,6 +1,7 @@
 //Program to evaluate a Prefix Expression using character array
 
 #include <iostream>
+#include <string.h>
 using namespace std;
 
 class Stack
