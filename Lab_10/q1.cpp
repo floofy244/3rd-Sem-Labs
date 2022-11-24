@@ -283,14 +283,14 @@ public:
 
 int main()
 {
-    tree t;
+    tree t; 
     t.create();
     t.preorderIterative();
     t.inorderIterative();
     t.postorderIterative();
-    t.parent(5);
+    t.parent(1);
     t.depth();
-    t.ancestors(5);
+    t.ancestors(50);
     t.leafNodes();
     return 0;
 }
