@@ -57,12 +57,40 @@ class FileOperation
     }
 }
 
+class Thread1 extends Thread
+{
+    FileOperation f;
+    Thread1(FileOperation f)
+    {
+        this.f = f;
+    }
+    public void run()
+    {
+        f.WriteStudentDetails();
+    }
+}
+
+class Thread2 extends Thread
+{
+    FileOperation f;
+    Thread2(FileOperation f)
+    {
+        this.f = f;
+    }
+    public void run()
+    {
+        f.ReadStudentDetails();
+    }
+}
+
 public class sum
 {
     public static void main(String[] args)
     {
         FileOperation f = new FileOperation();
-        f.WriteStudentDetails();
-        f.ReadStudentDetails();
+        Thread1 t1 = new Thread1(f);
+        Thread2 t2 = new Thread2(f);
+        t1.start();
+        t2.start();
     }
 }

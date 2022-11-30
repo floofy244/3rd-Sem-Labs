@@ -32,17 +32,83 @@ public:
         return temp;
     }
 
-    node *insert(node *root, int data)
+    void insert(int data)
     {
+        node *temp = createNode(data);
         if (root == NULL)
-            root = createNode(data);
-        else if (data < root->data)
-            root->left = insert(root->left, data);
-        else if (data > root->data)
-            root->right = insert(root->right, data);
-        return root;
+        {
+            root = temp;
+        }
+        else
+        {
+            node *p = root;
+            node *q = NULL;
+            while (p != NULL)
+            {
+                q = p;
+                if (data < p->data)
+                    p = p->left;
+                else
+                    p = p->right;
+            }
+            if (data < q->data)
+                q->left = temp;
+            else
+                q->right = temp;
+        }
     }
 
+    void deleteIterative(int data)
+    {
+        node *parent = NULL;
+        node *current = root;
+        while (current != NULL && current->data != data)
+        {
+            parent = current;
+            if (data < current->data)
+                current = current->left;
+            else
+                current = current->right;
+        }
+        if (current == NULL)
+            return;
+        if (current->left == NULL && current->right == NULL)
+        {
+            if (parent == NULL)
+                root = NULL;
+            else if (parent->left == current)
+                parent->left = NULL;
+            else
+                parent->right = NULL;
+            delete current;
+        }
+        else if (current->left == NULL)
+        {
+            if (parent == NULL)
+                root = current->right;
+            else if (parent->left == current)
+                parent->left = current->right;
+            else
+                parent->right = current->right;
+            delete current;
+        }
+        else if (current->right == NULL)
+        {
+            if (parent == NULL)
+                root = current->left;
+            else if (parent->left == current)
+                parent->left = current->left;
+            else
+                parent->right = current->left;
+            delete current;
+        }
+        else
+        {
+            node *temp = findMin(current->right);
+            current->data = temp->data;
+            deleteIterative(temp->data);
+        }
+    }
     node *deleteNode(node *root, int data)
     {
         if (root == NULL)
@@ -80,6 +146,7 @@ public:
         return root;
     }
 
+    
     int search(node *root,int data)
     {
         if (root == NULL)
@@ -146,7 +213,7 @@ int main()
         case 1:
             cout << "Enter data: ";
             cin >> data;
-            t.insert(t.getRoot(), data);
+            t.insert(data);
             break;
         case 2:
             cout << "Enter data: ";

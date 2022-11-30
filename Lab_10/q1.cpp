@@ -288,7 +288,7 @@ int main()
     t.preorderIterative();
     t.inorderIterative();
     t.postorderIterative();
-    t.parent(1);
+    t.parent(5);
     t.depth();
     t.ancestors(50);
     t.leafNodes();
