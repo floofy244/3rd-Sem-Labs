@@ -183,6 +183,32 @@ public:
         cout << endl;
     }
 
+    void levelOrder()
+    {
+        node *q[100];
+        int front = 0, rear = 0;
+        node *t = root;
+
+        cout << t->data << " ";
+        q[rear++] = t;
+
+        while (front < rear)
+        {
+            t = q[front++];
+            if (t->left)
+            {
+                cout << t->left->data << " ";
+                q[rear++] = t->left;
+            }
+            if (t->right)
+            {
+                cout << t->right->data << " ";
+                q[rear++] = t->right;
+            }
+        }
+        cout << endl;
+    }
+
     void parent(int key)
     {
         stack stk(100);
