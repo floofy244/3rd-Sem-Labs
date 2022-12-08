@@ -7,6 +7,8 @@ public:
     int data;
     node *left;
     node *right;
+    bool rthread;
+    bool lthread;
 };
 
 class stack
@@ -22,6 +24,14 @@ public:
     {
         this->size = size;
         top = -1;
+    }
+
+    node *peek()
+    {
+        if (top == -1)
+            return NULL;
+        else
+            return s[top];
     }
 
     void push(node *x)
@@ -128,6 +138,7 @@ public:
         }
         cout << endl;
     }
+    
 
     void inorderIterative()
     {
@@ -149,6 +160,39 @@ public:
             }
         }
         cout << endl;
+    }
+
+    void createThreads()
+    {
+        node *q[100];
+        int front = 0, rear = 0;
+        node *t = root;
+        node *prev = NULL;
+
+        while (t || front <= rear)
+        {
+            if (t)
+            {
+                q[rear++] = t;
+                t = t->left;
+            }
+            else
+            {
+                t = q[--rear];
+                if (prev && !prev->right)
+                {
+                    prev->right = t;
+                    prev->rthread = true;
+                }
+                if (!t->left)
+                {
+                    t->left = prev;
+                    t->lthread = true;
+                }
+                prev = t;
+                t = t->right;
+            }
+        }
     }
 
     void postorderIterative()
@@ -311,12 +355,14 @@ int main()
 {
     tree t; 
     t.create();
-    t.preorderIterative();
-    t.inorderIterative();
-    t.postorderIterative();
-    t.parent(5);
-    t.depth();
-    t.ancestors(50);
-    t.leafNodes();
+    // t.preorderIterative();
+    // t.inorderIterative();
+    // t.postorderIterative();
+
+    t.createThreads();
+    // t.parent(5);
+    // t.depth();
+    // t.ancestors(50);
+    // t.leafNodes();
     return 0;
 }
